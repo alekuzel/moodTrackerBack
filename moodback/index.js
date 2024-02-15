@@ -73,6 +73,27 @@ app.delete('/moods/:id', async (req, res) => {
     }
 });
 
+app.put('/moods/:id', async (req, res) => {
+    try {
+        const mood = await Mood.findById(req.params.id);
+        if (!mood) {
+            return res.status(404).send('Mood not found');
+        }
+        // Update mood fields
+        mood.high = req.body.high;
+        mood.low = req.body.low;
+        // Update other fields as needed
+        // Save the updated mood
+        await mood.save();
+        res.send(mood);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send(error);
+    }
+});
+
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
