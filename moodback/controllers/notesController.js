@@ -1,56 +1,56 @@
-const User = require('../models/notesModel');
+const Note = require('../models/notesModel');
 
 // Controller functions
 exports.getAllNotes = async (req, res) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const notes = await Note.find();
+    res.json(notes);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-exports.getUserById = async (req, res) => {
+exports.getNoteById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    const note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).json({ message: 'Note not found' });
     }
-    res.json(user);
+    res.json(note);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-exports.createUser = async (req, res) => {
+exports.createNote = async (req, res) => {
   try {
-    const user = new User(req.body);
-    await user.save();
-    res.status(201).json(user);
+    const note = new Note(req.body);
+    await note.save();
+    res.status(201).json(note);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateNote = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    const note = await Note.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!note) {
+      return res.status(404).json({ message: 'Note not found' });
     }
-    res.json(user);
+    res.json(note);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteNote = async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    const note = await Note.findByIdAndDelete(req.params.id);
+    if (!note) {
+      return res.status(404).json({ message: 'Note not found' });
     }
-    res.json({ message: 'User deleted successfully' });
+    res.json({ message: 'Note deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
