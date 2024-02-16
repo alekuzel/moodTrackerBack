@@ -23,6 +23,9 @@ app.use('/moods', moodsRouter);
 const usersRouter = require('./routes/users');
 app.use('/users', usersRouter);
 
+const notesRouter = require('./routes/notes');
+app.use('/notes', notesRouter);
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
