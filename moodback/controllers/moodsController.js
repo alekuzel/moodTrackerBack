@@ -1,4 +1,4 @@
-const Mood = require('../models/moodModel');
+const Mood = require('../models/moodsModel');
 
 // Controller functions
 exports.getAllMoods = async (req, res) => {

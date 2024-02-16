@@ -20,6 +20,9 @@ mongoose.connect('mongodb://localhost:27017/moodTracker', {
 const moodsRouter = require('./routes/moods');
 app.use('/moods', moodsRouter);
 
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
