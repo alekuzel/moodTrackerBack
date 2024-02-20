@@ -26,6 +26,9 @@ app.use('/users', usersRouter);
 const notesRouter = require('./routes/notes');
 app.use('/notes', notesRouter);
 
+const auth = require('./routes/auth');
+app.use('/auth', auth);
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
