@@ -1,21 +1,6 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/usersModel');
-
-async function registerUser(req, res) {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword
-    });
-    await newUser.save();
-    res.status(201).send('User registered successfully');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred during registration');
-  }
-}
 
 async function loginUser(req, res) {
   const { email, password } = req.body;
@@ -25,8 +10,11 @@ async function loginUser(req, res) {
   const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) return res.status(401).send('Invalid password');
 
-  // Here you would typically generate a session token or JWT and send it to the client
-  res.send('Login successful');
+  // Generate JWT token
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+
+  // Send JSON response with token
+  res.json({ token });
 }
 
-module.exports = { registerUser, loginUser };
+module.exports = { loginUser };
