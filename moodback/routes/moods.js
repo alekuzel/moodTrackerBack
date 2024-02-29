@@ -4,6 +4,7 @@ const moodsController = require('../controllers/moodsController');
 
 // Define routes for notes
 router.get('/', moodsController.getAllMoods);
+router.get('/users/:userid', moodsController.getMoodsByUserId); // Move this line up
 router.get('/:id', moodsController.getMoodById);
 router.post('/', moodsController.createMood);
 router.put('/:id', moodsController.updateMood);

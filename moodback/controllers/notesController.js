@@ -55,3 +55,13 @@ exports.deleteNote = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getNotesByUserId = async (req, res) => {
+  try {
+    const userid = req.params.userid;
+    const notes = await Note.find({ userid });
+    res.json(notes);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

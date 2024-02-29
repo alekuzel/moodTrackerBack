@@ -55,3 +55,15 @@ exports.deleteMood = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+exports.getMoodsByUserId = async (req, res) => {
+  const userId = req.params.userid;
+
+  try {
+    const moods = await Mood.find({ userid: userId });
+    res.json(moods);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
