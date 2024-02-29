@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator'); //plug in for making sure email (or anything else) is unique
-const bcrypt = require('bcrypt'); //use it for hashing passwords
+const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcrypt');
 
-// Define your schema as normal.
 const userSchema = mongoose.Schema({
   name: String,
   lastname: String,
-    email: { type: String, index: true, unique: true, required: true },
-    password: { type: String, required: true }
+  email: { type: String, index: true, unique: true, required: true },
+  password: { type: String, required: true }
 });
 
-// Apply the uniqueValidator plugin to userSchema.
 userSchema.plugin(uniqueValidator);
 
-// here we hash all the password and then save them
 userSchema.pre('save', async function(next) {
   const user = this;
   if (!user.isModified('password')) return next();
@@ -27,8 +24,16 @@ userSchema.pre('save', async function(next) {
   }
 });
 
+// Override toJSON method to return _id as a string
+userSchema.set('toJSON', {
+  transform: function(doc, ret, options) {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+    delete ret.password;
+  }
+});
 
-// Define User model
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

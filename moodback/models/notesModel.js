@@ -5,7 +5,7 @@ const noteSchema = new mongoose.Schema({
   title: String,
   text: String,
   date: Date,
-  userid: Number //that is user who created the note
+  userid: String //that is user who created the note
 });
 
 // Define User model

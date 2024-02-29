@@ -7,7 +7,7 @@ const moodSchema = new mongoose.Schema({
   sleep: Number,
   move: Number,
   date: Date,
-  userid: Number
+  userid: String
 });
 
 // Define Mood model
