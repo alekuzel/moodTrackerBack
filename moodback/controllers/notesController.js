@@ -1,6 +1,7 @@
+// import the Note model
 const Note = require('../models/notesModel');
 
-// Controller functions
+//get all notes
 exports.getAllNotes = async (req, res) => {
   try {
     const notes = await Note.find();
@@ -10,6 +11,7 @@ exports.getAllNotes = async (req, res) => {
   }
 };
 
+//get a note by id
 exports.getNoteById = async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
@@ -22,6 +24,7 @@ exports.getNoteById = async (req, res) => {
   }
 };
 
+// create a new note
 exports.createNote = async (req, res) => {
   try {
     const note = new Note(req.body);
@@ -32,6 +35,7 @@ exports.createNote = async (req, res) => {
   }
 };
 
+// update a note by its ID
 exports.updateNote = async (req, res) => {
   try {
     const note = await Note.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -44,6 +48,7 @@ exports.updateNote = async (req, res) => {
   }
 };
 
+// delete a note by its ID
 exports.deleteNote = async (req, res) => {
   try {
     const note = await Note.findByIdAndDelete(req.params.id);
@@ -56,6 +61,7 @@ exports.deleteNote = async (req, res) => {
   }
 };
 
+//function to get notes by user ID
 exports.getNotesByUserId = async (req, res) => {
   try {
     const userid = req.params.userid;

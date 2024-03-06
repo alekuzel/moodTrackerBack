@@ -1,6 +1,7 @@
+
 const Mood = require('../models/moodsModel');
 
-// Controller functions
+// C get all moods
 exports.getAllMoods = async (req, res) => {
   try {
     const moods = await Mood.find();
@@ -10,6 +11,7 @@ exports.getAllMoods = async (req, res) => {
   }
 };
 
+//  get a mood by id
 exports.getMoodById = async (req, res) => {
   try {
     const mood = await Mood.findById(req.params.id);
@@ -22,6 +24,7 @@ exports.getMoodById = async (req, res) => {
   }
 };
 
+// create a new mood
 exports.createMood = async (req, res) => {
   try {
     const mood = new Mood(req.body);
@@ -32,6 +35,7 @@ exports.createMood = async (req, res) => {
   }
 };
 
+//  update a mood
 exports.updateMood = async (req, res) => {
   try {
     const mood = await Mood.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -44,6 +48,7 @@ exports.updateMood = async (req, res) => {
   }
 };
 
+// delete a mood 
 exports.deleteMood = async (req, res) => {
   try {
     const mood = await Mood.findByIdAndDelete(req.params.id);
@@ -56,7 +61,7 @@ exports.deleteMood = async (req, res) => {
   }
 };
 
-
+// get moods by userid
 exports.getMoodsByUserId = async (req, res) => {
   const userId = req.params.userid;
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const notesController = require('../controllers/notesController');
 
-// Define routes for notes
+// routes for notes
 router.get('/', notesController.getAllNotes);
 router.get('/users/:userid', notesController.getNotesByUserId);
 router.get('/:id', notesController.getNoteById);

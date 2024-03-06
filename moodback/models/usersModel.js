@@ -24,7 +24,7 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// Override toJSON method to return _id as a string
+// return _id as a string
 userSchema.set('toJSON', {
   transform: function(doc, ret, options) {
     ret.id = ret._id.toString();
